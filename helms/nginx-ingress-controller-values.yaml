@@ -1,0 +1,36 @@
+fullnameOverride: nginx-ingress
+controller:
+  hostNetwork: false
+  replicaCount: 3
+  config: {}
+  extraArgs: {}
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+  podAnnotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "10254"
+  metrics:
+    port: 10254
+    enabled: true
+  tolerations:
+  - key: only_critical
+    operator: Equal
+    value: "true"
+    effect: NoSchedule
+  dnsPolicy: ClusterFirst
+  service:
+    externalTrafficPolicy: ""
+    annotations:
+      # here will be cloud-specific annotations
+      load-balancer.hetzner.cloud/name: b2f8d9036-meb348af3-lb
+      load-balancer.hetzner.cloud/use-private-ip: "true"
+      load-balancer.hetzner.cloud/location: fsn1
+      load-balancer.hetzner.cloud/disable-private-ingress: "true"
+      #
+  admissionWebhooks:
+    enabled: true
