@@ -55,7 +55,7 @@ spec:
       paths:
       - path: /
         pathType: Prefix
-        backend:
+        backend:                  #ovo mu govori na koji servis i port ce da "spusta" saobracaj
           service:
             name: testapp-service
             port:
@@ -74,7 +74,7 @@ metadata:
     app: testapp
 spec:
   type: ClusterIP
-  selector:
+  selector:                     #ovo mu govori na sta ce da "spusta" saobracaj
     app: testapp
   ports:
   - protocol: TCP
